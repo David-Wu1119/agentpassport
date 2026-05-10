@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.11.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Format
+        run: pnpm format:check
+
+      - name: Check
+        run: pnpm check
+
+      - name: CLI smoke
+        run: |
+          node dist/cli.js issue --agent ci-agent --acting-for ci@example.com --scope 'github:pull_request:*' --resource github:David-Wu1119/agentpassport --out-dir .agentpassport
+          node dist/cli.js verify .agentpassport/passports/*.passport.json
+
+      - name: Package smoke test
+        run: npm pack --dry-run
