@@ -1,0 +1,65 @@
+{
+  "name": "agentpassport",
+  "version": "0.1.0",
+  "description": "CLI and SDK for verifiable AI-agent identity, scoped delegation, revocation, and signed action receipts.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "agentpassport": "./dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "SECURITY.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "check": "npm run typecheck && npm test && npm run build",
+    "format:check": "prettier \"**/*.{md,json,yml,yaml,ts}\" --check",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "prepublishOnly": "npm run check",
+    "agentpassport": "tsx src/cli.ts"
+  },
+  "engines": {
+    "node": ">=20.18.0"
+  },
+  "packageManager": "pnpm@10.11.0",
+  "homepage": "https://github.com/David-Wu1119/agentpassport#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/David-Wu1119/agentpassport.git"
+  },
+  "bugs": {
+    "url": "https://github.com/David-Wu1119/agentpassport/issues"
+  },
+  "keywords": [
+    "ai-agent",
+    "agent-identity",
+    "delegation",
+    "ed25519",
+    "llm-security",
+    "mcp",
+    "provenance",
+    "security-tools"
+  ],
+  "dependencies": {
+    "commander": "^14.0.2",
+    "picocolors": "^1.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.3",
+    "prettier": "^3.8.3",
+    "tsup": "^8.5.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.15"
+  }
+}

@@ -1,0 +1,9 @@
+node_modules/
+dist/
+coverage/
+.agentpassport/
+*.log
+.DS_Store
+.env
+.env.*
+!.env.example
